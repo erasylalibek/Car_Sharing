@@ -2,6 +2,7 @@ package com.springcar.app.controllers;
 
 import com.springcar.app.models.entity.Car;
 import com.springcar.app.models.entity.Client;
+import com.springcar.app.models.entity.TypeTransmission;
 import com.springcar.app.models.service.interfaces.ICarService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.springcar.app.models.entity.Reservation;
 import com.springcar.app.models.service.interfaces.IOfficeMasterService;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class ProfileController {
@@ -44,5 +49,62 @@ public class ProfileController {
     @GetMapping("/profile/deleteCarr")
     public String deleteCar (HttpServletRequest request, HttpServletResponse response, Model model) {
         return "/user/profile/deleteCar";
+    }
+
+    @PostMapping("/profile/deleteCarr")
+    public String deleteCarProcess (HttpSession session, @ModelAttribute ("deleteCar") Car newCar) {
+
+        iCarService.deleteCar(newCar);
+        return "user/profile/index";
+    }
+
+    @PostMapping("/profile/filter")
+    public String filterCarFleet(HttpSession session,
+                                 @RequestParam(name="categorySelection") String categoryValue,
+                                 @RequestParam(name="transmissionSelection") TypeTransmission transmissionValue,
+                                 @RequestParam(name="priceOrderSelection") String priceOrderValue) {
+
+        List<Car> fleet = iCarService.findAll();
+        List<Car> filteredFleet = new ArrayList<Car>();
+
+        if (!categoryValue.isEmpty()) {
+            session.setAttribute("category", categoryValue);
+            for (Car c : fleet) {
+                if (c.getCategory().getCodCategory().equalsIgnoreCase(categoryValue)) {
+                    filteredFleet.add(c);
+                }
+            }
+            fleet.clear();
+            fleet.addAll(filteredFleet);
+        }else {
+            session.removeAttribute("category");
+        }
+
+        if (transmissionValue != null) {
+            session.setAttribute("transmission", transmissionValue.toString());
+            filteredFleet.clear();
+            for (Car c : fleet) {
+                if (c.getTransmission().equals(transmissionValue)) {
+                    filteredFleet.add(c);
+                }
+            }
+            fleet.clear();
+            fleet.addAll(filteredFleet);
+        } else {
+            session.removeAttribute("transmission");
+        }
+
+        if (priceOrderValue != null) {
+            session.setAttribute("priceOrder", priceOrderValue);
+            if (!fleet.isEmpty()) {
+                filteredFleet = Utils.carSort(fleet, priceOrderValue);
+            }
+        } else {
+            session.removeAttribute("priceOrder");
+        }
+
+        session.setAttribute("fleet", filteredFleet);
+
+        return "redirect:user/profile/index";
     }
 }

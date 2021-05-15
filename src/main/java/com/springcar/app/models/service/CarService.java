@@ -55,7 +55,7 @@ public class CarService implements ICarService{
 	}
 
 	@Override
-	public void deleteCar(Long id) {
-		iCarRepository.deleteById(id);
+	public void deleteCar(Car car) {
+		iCarRepository.delete(car);
 	}
 }
