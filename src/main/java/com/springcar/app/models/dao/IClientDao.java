@@ -1,5 +1,6 @@
 package com.springcar.app.models.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
@@ -16,5 +17,5 @@ public interface IClientDao extends CrudRepository<Client, Long> {
 	  
 	  @Query("select u from Client u where u.userName = ?1") public
 	  Optional<Client> findByUser(String user);
-	 
+
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.springcar.app.controllers.beans.LoginBean;
@@ -31,7 +32,7 @@ public class UserController {
 		
 		Client client = clientService.findByUser(login.getUserName());
 		
-		if (null != login && client != null && client.getPassword().equals(login.getPassword())) {
+		if (client != null && client.getPassword().equals(login.getPassword())) {
 			session.setAttribute("client", client);
 		} else {
 			session.setAttribute("error_userAuthentification", "Username or password is wrong!");
@@ -67,6 +68,17 @@ public class UserController {
 		session.removeAttribute("tempClient");
 		return "redirect:/";
 	}
+
+	@GetMapping("/user/profile")
+	public String getAllCars(HttpSession session, Model model,
+							 @PathVariable(name = "id") Long id) {
+
+		session.setAttribute("booked", clientService.getAllBookedCarsOfUser(id));
+		session.setAttribute("available", clientService.getAllAvailableCarsOfUser(id));
+
+		return "fleet/index";
+	}
+
 	
 		
 	public boolean exists (Client client) {
