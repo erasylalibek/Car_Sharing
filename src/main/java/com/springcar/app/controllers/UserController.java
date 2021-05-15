@@ -25,6 +25,11 @@ public class UserController {
 	public String showLoginForm (HttpServletRequest request, HttpServletResponse response, Model model) {
 		return "/user/login/index";
 	}
+
+	@GetMapping("/user/profile")
+	public String showProfileForm (HttpServletRequest request, HttpServletResponse response, Model model) {
+		return "/user/profile/index";
+	}
 	
 	@PostMapping ("/user/login")
 	public String loginProcess (HttpServletRequest request, HttpServletResponse response, @ModelAttribute("login") LoginBean login, HttpSession session) {

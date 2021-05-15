@@ -6,7 +6,7 @@ services:
     image: postgres:latest
     hostname: localhost
     ports:
-      - 5437:5432
+      - 5433:5432
     env_file:
       - .env
     restart: unless-stopped

@@ -11,6 +11,7 @@ public interface ICarService {
 	public List<Car> findByCategory(String category);
 	public List<Car> findByTransmission(TypeTransmission transmission);
 	public List<Car> findByTransmissionAndCategory(TypeTransmission transmission, String Category);
-	
+	public void addCar(Car car);
+	public void deleteCar(Long id);
 
 }

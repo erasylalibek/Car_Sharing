@@ -36,7 +36,7 @@ public class Car implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private TypeTransmission transmission;
 
-	private boolean ac;
+	private boolean ac=true;
 	private int seats;
 	private int doors;
 	

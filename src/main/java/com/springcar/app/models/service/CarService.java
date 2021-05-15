@@ -2,6 +2,7 @@ package com.springcar.app.models.service;
 
 import java.util.List;
 
+import com.springcar.app.models.repository.ICarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,12 @@ public class CarService implements ICarService{
 	
 	@Autowired
 	ICarDao carDao;
+
+	@Autowired
+	private ICarRepository iCarRepository;
+
+
+
 
 	@Override
 	public List<Car> findByTransmission(TypeTransmission transmission) {
@@ -42,4 +49,13 @@ public class CarService implements ICarService{
 		return carDao.findById(id).orElse(null);
 	}
 
+	@Override
+	public void addCar(Car car) {
+		iCarRepository.save(car);
+	}
+
+	@Override
+	public void deleteCar(Long id) {
+		iCarRepository.deleteById(id);
+	}
 }
