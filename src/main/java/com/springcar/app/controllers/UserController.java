@@ -26,6 +26,20 @@ public class UserController {
 	public String showLoginForm (HttpServletRequest request, HttpServletResponse response, Model model) {
 		return "/user/login/index";
 	}
+
+	@GetMapping("/user/profile")
+	public String showProfileForm (HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {
+		return "/user/profile/index";
+	}
+
+	@GetMapping("/user/exit")
+	public String exit (HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {
+		session=null;
+		model.addAttribute(
+		"session", session
+				);
+		return "redirect:/";
+	}
 	
 	@PostMapping ("/user/login")
 	public String loginProcess (HttpServletRequest request, HttpServletResponse response, @ModelAttribute("login") LoginBean login, HttpSession session) {
@@ -69,22 +83,21 @@ public class UserController {
 		return "redirect:/";
 	}
 
-	@GetMapping("/user/profile")
-	public String getAllCars(HttpSession session, Model model,
-							 @PathVariable(name = "id") Long id) {
+//	@GetMapping("/user/profile")
+//	public String getAllCars(HttpSession session, Model model,
+//							 @PathVariable(name = "id") Long id) {
+//
+//		session.setAttribute("booked", clientService.getAllBookedCarsOfUser(id));
+//		session.setAttribute("available", clientService.getAllAvailableCarsOfUser(id));
+//
+//		return "fleet/index";
+//	}
 
-		session.setAttribute("booked", clientService.getAllBookedCarsOfUser(id));
-		session.setAttribute("available", clientService.getAllAvailableCarsOfUser(id));
 
-		return "fleet/index";
-	}
-
-	
-		
 	public boolean exists (Client client) {
 		if (clientService.findByUser(client.getUserName()) != null) {
 			return true;
-		}	
+		}
 		return false;
 	}
 }

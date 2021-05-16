@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{base}">
+
+<head>
+    <title>Delete car</title>
+</head>
+
+<div layout:fragment="page_content" id="page_content" class="container h-100 bg-white overflow-hidden">
+    <div class="row align-items-center h-100">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card my-5">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Delete car</h5>
+                    <br><br>
+                    <form th:action="@{/profile/deleteCarr}" th:object="${Car}" method="post">
+                        <div class="row form-row px-0">
+
+
+                            <div class="form-group col-lg-6">
+                                <label for="inputSurname">Category</label>
+                                <br>
+                                <input type="text" id="inputSurname" name="car_id" class="form-control" placeholder="Enter ID of car" required>
+                            </div>
+                        </div>
+                        <br><br><br><br>
+
+                        <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"> <i class="fas fa-user-circle mr-2"></i> DELETE CAR
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<th:block layout:fragment="scripts">
+    <script type="text/javascript">
+        console.log('Hello World');
+    </script>
+</th:block>

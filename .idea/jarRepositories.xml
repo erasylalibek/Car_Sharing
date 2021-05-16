@@ -7,6 +7,21 @@
       <option name="url" value="https://repo.maven.apache.org/maven2" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="egov" />
+      <option name="name" value="egov" />
+      <option name="url" value="http://192.168.39.111/archiva/repository/egov" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="pep-ibm" />
+      <option name="name" value="IBM WebSphere Artifacts" />
+      <option name="url" value="http://192.168.39.111/archiva/repository/pep-ibm" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="pep-old" />
+      <option name="name" value="Our snapshots" />
+      <option name="url" value="http://192.168.39.111/archiva/repository/pepold" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="central" />
       <option name="name" value="Maven Central repository" />
       <option name="url" value="https://repo1.maven.org/maven2" />
@@ -15,6 +30,16 @@
       <option name="id" value="jboss.community" />
       <option name="name" value="JBoss Community repository" />
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="pep-internal" />
+      <option name="name" value="Our artifacts" />
+      <option name="url" value="http://192.168.39.111/archiva/repository/internal" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="internal-maven" />
+      <option name="name" value="internal-maven" />
+      <option name="url" value="http://192.168.39.111/archiva/repository/internal" />
     </remote-repository>
   </component>
 </project>
