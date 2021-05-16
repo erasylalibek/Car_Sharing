@@ -51,5 +51,10 @@ public class HomeController {
 	public String aboutUs(HttpSession session){
 		return "aboutus";
 	}
+
+	@GetMapping("/contactUs")
+	public String contactUs(){
+		return "contectus";
+	}
 	
 }
