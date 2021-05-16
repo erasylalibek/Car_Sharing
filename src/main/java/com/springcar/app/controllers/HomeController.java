@@ -45,5 +45,10 @@ public class HomeController {
 			return true;
 		}
 	}
+
+	@GetMapping("/aboutus")
+	public String aboutUs(HttpSession session){
+		return "aboutus";
+	}
 	
 }

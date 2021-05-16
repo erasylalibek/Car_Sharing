@@ -56,11 +56,11 @@ public class VehicleSelectionController {
 	}
 	
 	@GetMapping("/reservation/vehicleselect/selectCar")
-	public String showPeriodSelector(HttpSession session, @RequestParam("id") Long idCar) {
+	public String showPeriodSelector(HttpSession session, @RequestParam("id") Long car_id) {
 		
-		session.setAttribute("car", carService.findById(idCar));
+		session.setAttribute("car", carService.findById(car_id));
 		Reservation rent = (Reservation) session.getAttribute("reservation");
-		rent.setCarCategory(carService.findById(idCar).getCategory().getCodCategory());
+		rent.setCarCategory(carService.findById(car_id).getCategory().getCodCategory());
 		session.setAttribute("reservation", rent);
 		
 		return "redirect:/reservation/extrasconfig";

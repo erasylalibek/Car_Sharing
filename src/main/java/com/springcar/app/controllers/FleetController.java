@@ -35,9 +35,9 @@ public class FleetController {
 	
 	
 	@GetMapping("/selectCar")
-	public String showPeriodSelector(HttpSession session, @ModelAttribute("reservation") Reservation rent, @RequestParam("id") Long idCar) {
-		session.setAttribute("car", carService.findById(idCar));
-		rent.setCarCategory(carService.findById(idCar).getCategory().getCodCategory());
+	public String showPeriodSelector(HttpSession session, @ModelAttribute("reservation") Reservation rent, @RequestParam("car_id") Long car_id) {
+		session.setAttribute("car", carService.findById(car_id));
+		rent.setCarCategory(carService.findById(car_id).getCategory().getCodCategory());
 		session.setAttribute("reservation", rent);
 		return "redirect:/reservation/dateselection/";
 	}
